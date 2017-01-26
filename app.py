@@ -1,16 +1,24 @@
+import ffmpy
 from datetime import datetime
 from picamera import PiCamera
 
 camera = PiCamera()
 camera.resolution = (640, 480)
 
-# camera.start_recording('my_video.h264')
-# camera.wait_recording(60)
-# camera.stop_recording()
-
 while True:
     timestamp = datetime.now().strftime('%m-%d_%H:%M')
 
-    camera.start_recording('/var/www/html/{}.h264'.format(timestamp))
+    outfile_name = '/var/www/html/{}'.format(timestamp)
+
+    old_filename = outfile_name + '.h264'
+    new_filename = outfile_name + '.mp4'
+
+    camera.start_recording(outfile_name + '.h264')
     camera.wait_recording(10)
     camera.stop_recording()
+
+    ff = ffmpy.FFmpeg(
+        inputs={old_filename: None},
+        outputs={new_filename: None}
+    )
+    ff.run()
