@@ -10,15 +10,15 @@ while True:
 
     outfile_name = '/var/www/html/{}'.format(timestamp)
 
-    old_filename = outfile_name + '.h264'
+    old_filename = outfile_name + '.mjpeg'
     new_filename = outfile_name + '.mp4'
 
-    camera.start_recording(outfile_name + '.h264')
+    camera.start_recording(old_filename)
     camera.wait_recording(10)
     camera.stop_recording()
 
-    ff = ffmpy.FFmpeg(
-        inputs={old_filename: None},
-        outputs={new_filename: None}
-    )
-    ff.run()
+    # ff = ffmpy.FFmpeg(
+    #     inputs={old_filename: None},
+    #     outputs={new_filename: None}
+    # )
+    # ff.run()
