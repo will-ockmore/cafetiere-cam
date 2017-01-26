@@ -17,8 +17,8 @@ while True:
     camera.wait_recording(10)
     camera.stop_recording()
 
-    # ff = ffmpy.FFmpeg(
-    #     inputs={old_filename: None},
-    #     outputs={new_filename: None}
-    # )
-    # ff.run()
+    ff = ffmpy.FFmpeg(
+        inputs={old_filename: None},
+        outputs={new_filename: None}
+    )
+    ff.run()
